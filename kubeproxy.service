@@ -1,0 +1,7 @@
+[Unit]
+Description=Proxy for kube
+[Service]
+ExecStart=/home/ubuntu/kube_proxy_start.sh
+Restart=always
+[Install]
+WantedBy=multi-user.target

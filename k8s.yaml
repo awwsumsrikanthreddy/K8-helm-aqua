@@ -1,0 +1,40 @@
+- name: "Deploy kubernetes cluster - master"
+  hosts: masters
+  connection: local
+  vars:
+    kubernetes_allow_pods_on_master: true
+    kubernetes_version: '1.27'
+    kubernetes_version_kubeadm: 'stable-{{kubernetes_version}}'    
+    kubernetes_flannel_manifest_file_rbac: https://raw.githubusercontent.com/flannel-io/flannel/release1.23/Documentation/kube-flannel.yml
+    # kubernetes_kubeadm_init_extra_opts: "--apiserver-cert-extra-sans 35.91.192.188"
+  roles:    
+    - geerlingguy.kubernetes
+  become: true
+  tasks:
+    - name: create .kube directory      
+      become_user: ubuntu
+      file:
+        path: /home/ubuntu/.kube
+        state: directory
+        mode: 0755
+    - name: Check admin.conf file exists.
+      stat:
+        path: /etc/kubernetes/admin.conf
+      register: k8s_conf
+    - name: copy admin.conf to user''s kube config
+      copy:
+        src: /etc/kubernetes/admin.conf
+        dest: /home/ubuntu/.kube/config
+        remote_src: yes
+        owner: ubuntu
+      when: k8s_conf.stat.exists
+- name: "Join worker to kubernetes cluster"
+  hosts: workers
+  connection: ssh
+  vars:
+    kubernetes_version: '1.27'
+    kubernetes_version_kubeadm: 'stable-{{kubernetes_version}}'
+    kubernetes_role: "node"
+  roles:    
+    - geerlingguy.kubernetes
+  become: true
