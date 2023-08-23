@@ -1,0 +1,1041 @@
+ubuntu@ip-10-0-2-126:~$ vi  /home/ubuntu/aqua-helm/kube-enforcer/values.yaml
+(reverse-i-search)`app': kubectl ^Cply -f kube-flannel-rbac.yml
+ubuntu@ip-10-0-2-126:~$ helm upgrade --install --namespace aqua kube-enforcer aqua-helm/kube-enforcer --values /home/ubuntu/aqua-helm/kube-enforcer/values.yaml --version 2022.4.26
+WARNING: Kubernetes configuration file is group-readable. This is insecure. Location: /home/ubuntu/.kube/config
+WARNING: Kubernetes configuration file is world-readable. This is insecure. Location: /home/ubuntu/.kube/config
+Release "kube-enforcer" does not exist. Installing it now.
+Error: An error occurred while checking for chart dependencies. You may need to run `helm dependency build` to fetch missing dependencies: found in Chart.yaml, but missing in charts/ directory: enforcer
+ubuntu@ip-10-0-2-126:~$ helm upgrade --install --namespace aqua kube-enforcer aqua-helm/kube-enforcer --values /home/ubuntu/aqua-helm/kube-enforcer/values.yaml --version 2022.4.26^C
+ubuntu@ip-10-0-2-126:~$ helm dependency build
+WARNING: Kubernetes configuration file is group-readable. This is insecure. Location: /home/ubuntu/.kube/config
+WARNING: Kubernetes configuration file is world-readable. This is insecure. Location: /home/ubuntu/.kube/config
+walk.go:74: found symbolic link in path: /home/ubuntu/snap/helm/current resolves to /home/ubuntu/snap/helm/372. Contents of linked file included and used
+Error: Chart.yaml file is missing
+ubuntu@ip-10-0-2-126:~$ helm upgrade --install --namespace aqua kube-enforcer aqua-helm/kube-enforcer --values /home/ubuntu/aqua-helm/kube-enforcer/values.yaml --version 2022.4.26
+WARNING: Kubernetes configuration file is group-readable. This is insecure. Location: /home/ubuntu/.kube/config
+WARNING: Kubernetes configuration file is world-readable. This is insecure. Location: /home/ubuntu/.kube/config
+Release "kube-enforcer" does not exist. Installing it now.
+Error: An error occurred while checking for chart dependencies. You may need to run `helm dependency build` to fetch missing dependencies: found in Chart.yaml, but missing in charts/ directory: enforcer
+ubuntu@ip-10-0-2-126:~$ cd  /home/ubuntu/aqua-helm/kube-enforcer/
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ ls
+CHANGELOG.md  Chart.lock  Chart.yaml  LICENSE  README.md  ca.crt  ca.key  conf  crds  gen-certs.sh  server.crt  server.key  templates  values.yaml
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ helm --version
+WARNING: Kubernetes configuration file is group-readable. This is insecure. Location: /home/ubuntu/.kube/config
+WARNING: Kubernetes configuration file is world-readable. This is insecure. Location: /home/ubuntu/.kube/config
+Error: unknown flag: --version
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ helm -v
+WARNING: Kubernetes configuration file is group-readable. This is insecure. Location: /home/ubuntu/.kube/config
+WARNING: Kubernetes configuration file is world-readable. This is insecure. Location: /home/ubuntu/.kube/config
+Error: flag needs an argument: 'v' in -v
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ helm version
+WARNING: Kubernetes configuration file is group-readable. This is insecure. Location: /home/ubuntu/.kube/config
+WARNING: Kubernetes configuration file is world-readable. This is insecure. Location: /home/ubuntu/.kube/config
+version.BuildInfo{Version:"v3.10.1", GitCommit:"9f88ccb6aee40b9a0535fcc7efea6055e1ef72c9", GitTreeState:"clean", GoVersion:"go1.18.7"}
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ helm dependency update
+WARNING: Kubernetes configuration file is group-readable. This is insecure. Location: /home/ubuntu/.kube/config
+WARNING: Kubernetes configuration file is world-readable. This is insecure. Location: /home/ubuntu/.kube/config
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "aqua-helm" chart repository
+Update Complete. ⎈Happy Helming!⎈
+Saving 1 charts
+Deleting outdated charts
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ helm dependency build
+WARNING: Kubernetes configuration file is group-readable. This is insecure. Location: /home/ubuntu/.kube/config
+WARNING: Kubernetes configuration file is world-readable. This is insecure. Location: /home/ubuntu/.kube/config
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "aqua-helm" chart repository
+Update Complete. ⎈Happy Helming!⎈
+Saving 1 charts
+Deleting outdated charts
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ helm upgrade --install --namespace aqua kube-enforcer aqua-helm/kube-enforcer --values /home/ubuntu/aqua-helm/kube-enforcer/values.yaml --version 2022.4.26
+WARNING: Kubernetes configuration file is group-readable. This is insecure. Location: /home/ubuntu/.kube/config
+WARNING: Kubernetes configuration file is world-readable. This is insecure. Location: /home/ubuntu/.kube/config
+Release "kube-enforcer" does not exist. Installing it now.
+NAME: kube-enforcer
+LAST DEPLOYED: Wed Aug 23 04:40:29 2023
+NAMESPACE: aqua
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+======== Deployment Details =============
+
+CHART NAME: kube-enforcer
+CHART VERSION: 2022.4.26
+APP VERSION: 2022.4
+
+** Please be patient while the chart is being deployed **
+===================================================================================
+
+Thank you for Deploying Aqua Kube-Enforcer.
+You have deployed the following release: kube-enforcer.
+
+To get further information, you can run the commands:
+  $ helm status kube-enforcer --namespace aqua
+  $ helm get all kube-enforcer --namespace aqua
+
+Get the list of pods by executing:
+
+  $ kubectl get pods --namespace aqua -l app.kubernetes.io/instance=kube-enforcer
+
+Access the pod you want to debug by executing
+
+  $ kubectl exec --namespace aqua -ti <NAME OF THE POD> -- bash
+
+For more information about Aqua Kube-Enforcer, you can look over the docs on using:
+https://docs.aquasec.com/docs/kubeenforcer
+=======================================================================================
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl  get pods
+No resources found in default namespace.
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl  get pods -n aqua
+NAME                                  READY   STATUS         RESTARTS   AGE
+aqua-kube-enforcer-54bb48886d-l6m8k   0/1     ErrImagePull   0          12s
+starboard-operator-d8c55c999-vgztp    1/1     Running        0          12s
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl describe pods ^C
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ vi values.yaml
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ helm upgrade --install --namespace aqua kube-enforcer aqua-helm/kube-enforcer --values /home/ubuntu/aqua-helm/kube-enforcer/values.yaml --version 2022.4.26
+WARNING: Kubernetes configuration file is group-readable. This is insecure. Location: /home/ubuntu/.kube/config
+WARNING: Kubernetes configuration file is world-readable. This is insecure. Location: /home/ubuntu/.kube/config
+Release "kube-enforcer" has been upgraded. Happy Helming!
+NAME: kube-enforcer
+LAST DEPLOYED: Wed Aug 23 04:41:42 2023
+NAMESPACE: aqua
+STATUS: deployed
+REVISION: 2
+TEST SUITE: None
+NOTES:
+======== Deployment Details =============
+
+CHART NAME: kube-enforcer
+CHART VERSION: 2022.4.26
+APP VERSION: 2022.4
+
+** Please be patient while the chart is being deployed **
+===================================================================================
+
+Thank you for Deploying Aqua Kube-Enforcer.
+You have deployed the following release: kube-enforcer.
+
+To get further information, you can run the commands:
+  $ helm status kube-enforcer --namespace aqua
+  $ helm get all kube-enforcer --namespace aqua
+
+Get the list of pods by executing:
+
+  $ kubectl get pods --namespace aqua -l app.kubernetes.io/instance=kube-enforcer
+
+Access the pod you want to debug by executing
+
+  $ kubectl exec --namespace aqua -ti <NAME OF THE POD> -- bash
+
+For more information about Aqua Kube-Enforcer, you can look over the docs on using:
+https://docs.aquasec.com/docs/kubeenforcer
+=======================================================================================
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl  get pods -n aqua
+NAME                                  READY   STATUS             RESTARTS   AGE
+aqua-kube-enforcer-54bb48886d-l6m8k   0/1     ImagePullBackOff   0          76s
+starboard-operator-d8c55c999-vgztp    1/1     Running            0          76s
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl  get pods -n aqua
+NAME                                  READY   STATUS             RESTARTS   AGE
+aqua-kube-enforcer-54bb48886d-l6m8k   0/1     ImagePullBackOff   0          77s
+starboard-operator-d8c55c999-vgztp    1/1     Running            0          77s
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl describe ^C
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl delete pods aqua-kube-enforcer-54bb48886d-l6m8k -n aqua
+pod "aqua-kube-enforcer-54bb48886d-l6m8k" deleted
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl  get pods -n aqua
+NAME                                  READY   STATUS              RESTARTS   AGE
+aqua-kube-enforcer-54bb48886d-fvjk4   0/1     ContainerCreating   0          3s
+starboard-operator-d8c55c999-vgztp    1/1     Running             0          99s
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl logs -f aqua-kube-enforcer-54bb48886d-fvjk4 -n aqua
+Error from server (BadRequest): container "kube-enforcer" in pod "aqua-kube-enforcer-54bb48886d-fvjk4" is waiting to start: image can't be pulled
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl  get pods -n aqua
+NAME                                  READY   STATUS             RESTARTS   AGE
+aqua-kube-enforcer-54bb48886d-fvjk4   0/1     ImagePullBackOff   0          15s
+starboard-operator-d8c55c999-vgztp    1/1     Running            0          111s
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl  get pods -n aqua
+NAME                                  READY   STATUS             RESTARTS   AGE
+aqua-kube-enforcer-54bb48886d-fvjk4   0/1     ImagePullBackOff   0          17s
+starboard-operator-d8c55c999-vgztp    1/1     Running            0          113s
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl describe pods -n aqua aqua-kube-enforcer-54bb48886d-fvjk4
+Name:             aqua-kube-enforcer-54bb48886d-fvjk4
+Namespace:        aqua
+Priority:         0
+Service Account:  kube-enforcer-sa
+Node:             ip-10-0-2-126/10.0.2.126
+Start Time:       Wed, 23 Aug 2023 04:42:06 +0000
+Labels:           app=aqua-kube-enforcer
+                  app.kubernetes.io/instance=kube-enforcer
+                  app.kubernetes.io/managed-by=Helm
+                  app.kubernetes.io/name=aqua-kube-enforcer
+                  app.kubernetes.io/version=2022.4
+                  helm.sh/chart=kube-enforcer-2022.4.26
+                  pod-template-hash=54bb48886d
+                  role=kube-enforcer
+Annotations:      checksum/config: 857a37d0cf91c2037e3db81dec429cd65e852e7802031d75147562c0854e56bc
+Status:           Pending
+IP:               10.244.0.6
+IPs:
+  IP:           10.244.0.6
+Controlled By:  ReplicaSet/aqua-kube-enforcer-54bb48886d
+Containers:
+  kube-enforcer:
+    Container ID:
+    Image:          registry.aquasec.com/kube-enforcer:2022.4.348
+    Image ID:
+    Port:           8443/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       ImagePullBackOff
+    Ready:          False
+    Restart Count:  0
+    Liveness:       http-get http://:8080/healthz delay=60s timeout=1s period=30s #success=1 #failure=3
+    Readiness:      http-get http://:8080/readyz delay=60s timeout=1s period=30s #success=1 #failure=3
+    Environment Variables from:
+      aqua-csp-kube-enforcer  ConfigMap  Optional: false
+    Environment:
+      POD_NAME:    aqua-kube-enforcer-54bb48886d-fvjk4 (v1:metadata.name)
+      AQUA_TOKEN:  <set to the key 'token' in secret 'aqua-kube-enforcer-token'>  Optional: false
+    Mounts:
+      /certs from certs (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-czj2c (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  certs:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  aqua-kube-enforcer-certs
+    Optional:    false
+  kube-api-access-czj2c:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                From               Message
+  ----     ------     ----               ----               -------
+  Normal   Scheduled  27s                default-scheduler  Successfully assigned aqua/aqua-kube-enforcer-54bb48886d-fvjk4 to ip-10-0-2-126
+  Normal   BackOff    24s                kubelet            Back-off pulling image "registry.aquasec.com/kube-enforcer:2022.4.348"
+  Warning  Failed     24s                kubelet            Error: ImagePullBackOff
+  Normal   Pulling    12s (x2 over 26s)  kubelet            Pulling image "registry.aquasec.com/kube-enforcer:2022.4.348"
+  Warning  Failed     10s (x2 over 25s)  kubelet            Failed to pull image "registry.aquasec.com/kube-enforcer:2022.4.348": rpc error: code = Unknown desc = failed to pull and unpack image "registry.aquasec.com/kube-enforcer:2022.4.348": failed to resolve reference "registry.aquasec.com/kube-enforcer:2022.4.348": unexpected status from HEAD request to https://registry.aquasec.com/v2/kube-enforcer/manifests/2022.4.348: 401 Unauthorized
+  Warning  Failed     10s (x2 over 25s)  kubelet            Error: ErrImagePull
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ rm pas
+rm: cannot remove 'pas': No such file or directory
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ ls
+CHANGELOG.md  Chart.yaml  README.md  ca.key  conf  gen-certs.sh  server.key  values.yaml
+Chart.lock    LICENSE     ca.crt     charts  crds  server.crt    templates
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ vi values.yaml
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl  get pods -n aqua
+NAME                                  READY   STATUS             RESTARTS   AGE
+aqua-kube-enforcer-54bb48886d-fvjk4   0/1     ImagePullBackOff   0          81s
+starboard-operator-d8c55c999-vgztp    1/1     Running            0          2m57s
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl delete pods -n aqua aqua-kube-enforcer-54bb48886d-fvjk4
+pod "aqua-kube-enforcer-54bb48886d-fvjk4" deleted
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl  get pods -n aqua
+NAME                                  READY   STATUS              RESTARTS   AGE
+aqua-kube-enforcer-54bb48886d-sh4mg   0/1     ContainerCreating   0          3s
+starboard-operator-d8c55c999-vgztp    1/1     Running             0          3m9s
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl  get pods -n aqua
+NAME                                  READY   STATUS         RESTARTS   AGE
+aqua-kube-enforcer-54bb48886d-sh4mg   0/1     ErrImagePull   0          6s
+starboard-operator-d8c55c999-vgztp    1/1     Running        0          3m12s
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ helm upgrade --install --namespace aqua kube-enforcer aqua-helm/kube-enforcer --values /home/ubuntu/aqua-helm/kube-enforcer/values.yaml --version 2022.4.26
+WARNING: Kubernetes configuration file is group-readable. This is insecure. Location: /home/ubuntu/.kube/config
+WARNING: Kubernetes configuration file is world-readable. This is insecure. Location: /home/ubuntu/.kube/config
+Release "kube-enforcer" has been upgraded. Happy Helming!
+NAME: kube-enforcer
+LAST DEPLOYED: Wed Aug 23 04:43:55 2023
+NAMESPACE: aqua
+STATUS: deployed
+REVISION: 3
+TEST SUITE: None
+NOTES:
+======== Deployment Details =============
+
+CHART NAME: kube-enforcer
+CHART VERSION: 2022.4.26
+APP VERSION: 2022.4
+
+** Please be patient while the chart is being deployed **
+===================================================================================
+
+Thank you for Deploying Aqua Kube-Enforcer.
+You have deployed the following release: kube-enforcer.
+
+To get further information, you can run the commands:
+  $ helm status kube-enforcer --namespace aqua
+  $ helm get all kube-enforcer --namespace aqua
+
+Get the list of pods by executing:
+
+  $ kubectl get pods --namespace aqua -l app.kubernetes.io/instance=kube-enforcer
+
+Access the pod you want to debug by executing
+
+  $ kubectl exec --namespace aqua -ti <NAME OF THE POD> -- bash
+
+For more information about Aqua Kube-Enforcer, you can look over the docs on using:
+https://docs.aquasec.com/docs/kubeenforcer
+=======================================================================================
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl  get pods -n aqua
+NAME                                  READY   STATUS             RESTARTS   AGE
+aqua-kube-enforcer-54bb48886d-sh4mg   0/1     ImagePullBackOff   0          22s
+starboard-operator-d8c55c999-vgztp    1/1     Running            0          3m28s
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl  get pods -n aqua
+NAME                                  READY   STATUS             RESTARTS   AGE
+aqua-kube-enforcer-54bb48886d-sh4mg   0/1     ImagePullBackOff   0          24s
+starboard-operator-d8c55c999-vgztp    1/1     Running            0          3m30s
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl  get pods -n aqua
+NAME                                  READY   STATUS             RESTARTS   AGE
+aqua-kube-enforcer-54bb48886d-sh4mg   0/1     ImagePullBackOff   0          25s
+starboard-operator-d8c55c999-vgztp    1/1     Running            0          3m31s
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl describe -n aqua ^C
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl delete -n aqua aqua-kube-enforcer-54bb48886d-sh4mg
+error: the server doesn't have a resource type "aqua-kube-enforcer-54bb48886d-sh4mg"
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl  get pods -n aqua
+NAME                                  READY   STATUS             RESTARTS   AGE
+aqua-kube-enforcer-54bb48886d-sh4mg   0/1     ImagePullBackOff   0          47s
+starboard-operator-d8c55c999-vgztp    1/1     Running            0          3m53s
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl delete pods -n aqua aqua-kube-enforcer-54bb48886d-sh4mg
+pod "aqua-kube-enforcer-54bb48886d-sh4mg" deleted
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl  get pods -n aqua
+NAME                                  READY   STATUS    RESTARTS   AGE
+aqua-kube-enforcer-54bb48886d-zkn58   0/1     Running   0          5s
+starboard-operator-d8c55c999-vgztp    1/1     Running   0          4m6s
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl  get pods -n aqua
+NAME                                  READY   STATUS    RESTARTS   AGE
+aqua-kube-enforcer-54bb48886d-zkn58   0/1     Running   0          8s
+starboard-operator-d8c55c999-vgztp    1/1     Running   0          4m9s
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl logs -f aqua-kube-enforcer-54bb48886d-zkn58 -n aqua
+Initializing Aqua Container Security Platform: KubeEnforcer {version 15 0 2022.4.348 commit 13d40b78 compiled on Jul 11 2023 08:05:02 <nil>}
+2023/08/23 04:44:34 Using the default value provided: 40, for: AQUA_AUDIT_BULKSIZE
+2023/08/23 04:44:34 Using the default value provided: 5, for: AQUA_AUDIT_FLASHTIME_INTERVAL
+2023/08/23 04:44:34 Using the default value provided: 1, for: AQUA_AUDIT_CACHECLEANTIME_INTERVAL
+2023/08/23 04:44:34 Using the default value provided: 0, for: AQUA_KUBE_BENCH_JOB_BUFFER_INTERVAL
+2023/08/23 04:44:34 Using the default value provided: 20, for: AQUA_RPC_TIMEOUT
+2023/08/23 04:44:34 Using the default value provided: 600, for: AQUA_PERIODIC_DISCOVERY_DURATION
+2023/08/23 04:44:34 Using the default value provided: 3, for: AQUA_MAX_CONSECUTIVE_CONNECTION_ATTEMPTS
+2023/08/23 04:44:34 Using the default value provided: 10, for: AQUA_CONNECTIVITY_BACKOFF_DURATION
+2023-08-23 04:44:34.878 INFO    Logger started with level INFO
+2023-08-23 04:44:34.890 INFO    Cluster UID found       {"Cluster UID": "9f01d2f8-f0b7-438f-8401-b6077be3da51"}
+2023-08-23 04:44:34.929 INFO    KubeEnforcer Permission status of Pods  {"Allowed": "true"}
+2023-08-23 04:44:34.937 INFO    KubeEnforcer Read Permission status of Secrets at Cluster-level {"Allowed": "true"}
+2023-08-23 04:44:34.944 INFO    KubeEnforcer Write Permission status of Secrets at Cluster-level        {"Allowed": "true"}
+2023-08-23 04:44:35.109 INFO    KubeEnforcer Write Permission status of Secrets at Role-level   {"Allowed": "true"}
+2023-08-23 04:44:35.709 INFO    KubeEnforcer Permission status of Nodes         {"Allowed": "true"}
+2023-08-23 04:44:35.909 INFO    KubeEnforcer Permission status of Namespace     {"Allowed": "false"}
+2023-08-23 04:44:36.509 INFO    KubeEnforcer Permission status of ClusterRoles  {"Allowed": "true"}
+2023-08-23 04:44:37.109 INFO    KubeEnforcer Permission status of ClusterRoleBindings   {"Allowed": "true"}
+2023-08-23 04:44:37.709 INFO    KubeEnforcer Permission status of ComponentStatuses     {"Allowed": "true"}
+2023-08-23 04:44:38.309 INFO    KubeEnforcer Permission status of Daemonsets    {"Allowed": "true"}
+2023-08-23 04:44:38.909 INFO    KubeEnforcer Permission status of Deployments   {"Allowed": "true"}
+2023-08-23 04:44:39.509 INFO    KubeEnforcer Permission status of Jobs  {"Allowed": "true"}
+2023-08-23 04:44:40.108 INFO    KubeEnforcer Permission status of Cronjobs      {"Allowed": "true"}
+2023-08-23 04:44:40.708 INFO    KubeEnforcer Permission status of Replicasets   {"Allowed": "true"}
+2023-08-23 04:44:41.309 INFO    KubeEnforcer Permission status of Replicationcontrollers        {"Allowed": "true"}
+2023-08-23 04:44:41.909 INFO    KubeEnforcer Permission status of Statefulsets  {"Allowed": "true"}
+2023-08-23 04:44:42.509 INFO    KubeEnforcer Permission status of services      {"Allowed": "true"}
+2023-08-23 04:44:43.109 INFO    KubeEnforcer Permission status of configmaps    {"Allowed": "true"}
+2023-08-23 04:44:43.708 INFO    KubeEnforcer Permission status of roles         {"Allowed": "true"}
+2023-08-23 04:44:44.309 INFO    KubeEnforcer Permission status of rolebindings  {"Allowed": "true"}
+2023-08-23 04:44:44.910 INFO    KubeEnforcer Permission status of customresourcedefinitions     {"Allowed": "true"}
+2023-08-23 04:44:45.509 INFO    KubeEnforcer Permission status of ConfigAuditReport CRD         {"Allowed": "true"}
+2023-08-23 04:44:46.109 INFO    KubeEnforcer Permission status of ClusterConfigAuditReport CRD  {"Allowed": "true"}
+2023-08-23 04:44:46.308 INFO    KubeEnforcer Permission status of ImageContentSourcePolicy CRD  {"Allowed": "false"}
+2023-08-23 04:44:46.309 INFO    Connecting to Aqua Gateway
+2023-08-23 04:44:47.909 INFO    KubeEnforcer Permission status for kube-bench scans     {"Allowed": "true"}
+2023-08-23 04:44:47.909 INFO    Registering as Admission controller
+2023-08-23 04:44:47.910 INFO    Starting Leader Election with ID        {"ID": "9f01d2f8-f0b7-438f-8401-b6077be3da51_aqua-kube-enforcer-54bb48886d-zkn58"}
+I0823 04:44:47.910391       1 leaderelection.go:248] attempting to acquire leader lease aqua/kube-enforcer-leader...
+I0823 04:44:47.919663       1 leaderelection.go:258] successfully acquired lease aqua/kube-enforcer-leader
+2023-08-23 04:44:47.919 INFO    Started leading {"ID": "9f01d2f8-f0b7-438f-8401-b6077be3da51_aqua-kube-enforcer-54bb48886d-zkn58"}
+2023-08-23 04:44:47.944 INFO    Attempting to connect to management server via gRPC
+2023-08-23 04:44:47.945 INFO    Listening to requests from kube-apiserver using https...
+⇨ https server started on [::]:8443
+2023-08-23 04:44:47.946 INFO    Listening to requests from kube-apiserver using http...
+⇨ http server started on [::]:8080
+2023-08-23 04:44:47.946 INFO    Successfully connected to the server via gRPC
+2023-08-23 04:44:47.946 INFO    Waiting for leader election sync
+2023-08-23 04:44:47.946 INFO    Leader election sync is done.   {"LeaderPodName": "aqua-kube-enforcer-54bb48886d-zkn58"}
+2023-08-23 04:44:47.946 INFO    Registering Kube Enforcer with Gateway
+^C
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl  get pods -n aqua
+NAME                                  READY   STATUS    RESTARTS   AGE
+aqua-kube-enforcer-54bb48886d-zkn58   0/1     Running   0          31s
+starboard-operator-d8c55c999-vgztp    1/1     Running   0          4m32s
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ kubectl logs -f aqua-kube-enforcer-54bb48886d-zkn58 -n aqua
+Initializing Aqua Container Security Platform: KubeEnforcer {version 15 0 2022.4.348 commit 13d40b78 compiled on Jul 11 2023 08:05:02 <nil>}
+2023/08/23 04:44:34 Using the default value provided: 40, for: AQUA_AUDIT_BULKSIZE
+2023/08/23 04:44:34 Using the default value provided: 5, for: AQUA_AUDIT_FLASHTIME_INTERVAL
+2023/08/23 04:44:34 Using the default value provided: 1, for: AQUA_AUDIT_CACHECLEANTIME_INTERVAL
+2023/08/23 04:44:34 Using the default value provided: 0, for: AQUA_KUBE_BENCH_JOB_BUFFER_INTERVAL
+2023/08/23 04:44:34 Using the default value provided: 20, for: AQUA_RPC_TIMEOUT
+2023/08/23 04:44:34 Using the default value provided: 600, for: AQUA_PERIODIC_DISCOVERY_DURATION
+2023/08/23 04:44:34 Using the default value provided: 3, for: AQUA_MAX_CONSECUTIVE_CONNECTION_ATTEMPTS
+2023/08/23 04:44:34 Using the default value provided: 10, for: AQUA_CONNECTIVITY_BACKOFF_DURATION
+2023-08-23 04:44:34.878 INFO    Logger started with level INFO
+2023-08-23 04:44:34.890 INFO    Cluster UID found       {"Cluster UID": "9f01d2f8-f0b7-438f-8401-b6077be3da51"}
+2023-08-23 04:44:34.929 INFO    KubeEnforcer Permission status of Pods  {"Allowed": "true"}
+2023-08-23 04:44:34.937 INFO    KubeEnforcer Read Permission status of Secrets at Cluster-level {"Allowed": "true"}
+2023-08-23 04:44:34.944 INFO    KubeEnforcer Write Permission status of Secrets at Cluster-level        {"Allowed": "true"}
+2023-08-23 04:44:35.109 INFO    KubeEnforcer Write Permission status of Secrets at Role-level   {"Allowed": "true"}
+2023-08-23 04:44:35.709 INFO    KubeEnforcer Permission status of Nodes         {"Allowed": "true"}
+2023-08-23 04:44:35.909 INFO    KubeEnforcer Permission status of Namespace     {"Allowed": "false"}
+2023-08-23 04:44:36.509 INFO    KubeEnforcer Permission status of ClusterRoles  {"Allowed": "true"}
+2023-08-23 04:44:37.109 INFO    KubeEnforcer Permission status of ClusterRoleBindings   {"Allowed": "true"}
+2023-08-23 04:44:37.709 INFO    KubeEnforcer Permission status of ComponentStatuses     {"Allowed": "true"}
+2023-08-23 04:44:38.309 INFO    KubeEnforcer Permission status of Daemonsets    {"Allowed": "true"}
+2023-08-23 04:44:38.909 INFO    KubeEnforcer Permission status of Deployments   {"Allowed": "true"}
+2023-08-23 04:44:39.509 INFO    KubeEnforcer Permission status of Jobs  {"Allowed": "true"}
+2023-08-23 04:44:40.108 INFO    KubeEnforcer Permission status of Cronjobs      {"Allowed": "true"}
+2023-08-23 04:44:40.708 INFO    KubeEnforcer Permission status of Replicasets   {"Allowed": "true"}
+2023-08-23 04:44:41.309 INFO    KubeEnforcer Permission status of Replicationcontrollers        {"Allowed": "true"}
+2023-08-23 04:44:41.909 INFO    KubeEnforcer Permission status of Statefulsets  {"Allowed": "true"}
+2023-08-23 04:44:42.509 INFO    KubeEnforcer Permission status of services      {"Allowed": "true"}
+2023-08-23 04:44:43.109 INFO    KubeEnforcer Permission status of configmaps    {"Allowed": "true"}
+2023-08-23 04:44:43.708 INFO    KubeEnforcer Permission status of roles         {"Allowed": "true"}
+2023-08-23 04:44:44.309 INFO    KubeEnforcer Permission status of rolebindings  {"Allowed": "true"}
+2023-08-23 04:44:44.910 INFO    KubeEnforcer Permission status of customresourcedefinitions     {"Allowed": "true"}
+2023-08-23 04:44:45.509 INFO    KubeEnforcer Permission status of ConfigAuditReport CRD         {"Allowed": "true"}
+2023-08-23 04:44:46.109 INFO    KubeEnforcer Permission status of ClusterConfigAuditReport CRD  {"Allowed": "true"}
+2023-08-23 04:44:46.308 INFO    KubeEnforcer Permission status of ImageContentSourcePolicy CRD  {"Allowed": "false"}
+2023-08-23 04:44:46.309 INFO    Connecting to Aqua Gateway
+2023-08-23 04:44:47.909 INFO    KubeEnforcer Permission status for kube-bench scans     {"Allowed": "true"}
+2023-08-23 04:44:47.909 INFO    Registering as Admission controller
+2023-08-23 04:44:47.910 INFO    Starting Leader Election with ID        {"ID": "9f01d2f8-f0b7-438f-8401-b6077be3da51_aqua-kube-enforcer-54bb48886d-zkn58"}
+I0823 04:44:47.910391       1 leaderelection.go:248] attempting to acquire leader lease aqua/kube-enforcer-leader...
+I0823 04:44:47.919663       1 leaderelection.go:258] successfully acquired lease aqua/kube-enforcer-leader
+2023-08-23 04:44:47.919 INFO    Started leading {"ID": "9f01d2f8-f0b7-438f-8401-b6077be3da51_aqua-kube-enforcer-54bb48886d-zkn58"}
+2023-08-23 04:44:47.944 INFO    Attempting to connect to management server via gRPC
+2023-08-23 04:44:47.945 INFO    Listening to requests from kube-apiserver using https...
+⇨ https server started on [::]:8443
+2023-08-23 04:44:47.946 INFO    Listening to requests from kube-apiserver using http...
+⇨ http server started on [::]:8080
+2023-08-23 04:44:47.946 INFO    Successfully connected to the server via gRPC
+2023-08-23 04:44:47.946 INFO    Waiting for leader election sync
+2023-08-23 04:44:47.946 INFO    Leader election sync is done.   {"LeaderPodName": "aqua-kube-enforcer-54bb48886d-zkn58"}
+2023-08-23 04:44:47.946 INFO    Registering Kube Enforcer with Gateway
+2023-08-23 04:45:07.947 ERROR   Failed receiving response from gateway on registration call     {"error": "rpc error: code = DeadlineExceeded desc = context deadline exceeded"}
+2023-08-23 04:45:07.948 WARN    Failed connecting to gRPC server. Attempt: 1, sleep duration (seconds): 10, error: Failed to register Kube Enforcer: rpc error: code = DeadlineExceeded desc = context deadline exceeded
+^C
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ ping ^C
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ vi values.yaml
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ ping 54.177.22.156
+PING 54.177.22.156 (54.177.22.156) 56(84) bytes of data.
+^C
+--- 54.177.22.156 ping statistics ---
+96 packets transmitted, 0 received, 100% packet loss, time 97264ms
+
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ ^C
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ vi values.yaml
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ vi charts/enforcer-2022.4.14.tgz
+.helmignore   Chart.lock    LICENSE       ca.crt        charts/       crds/         server.crt    templates/
+CHANGELOG.md  Chart.yaml    README.md     ca.key        conf/         gen-certs.sh  server.key    values.yaml
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ vi charts/enforcer-2022.4.14.tgz ^C
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ ls
+CHANGELOG.md  Chart.lock  Chart.yaml  LICENSE  README.md  ca.crt  ca.key  charts  conf  crds  gen-certs.sh  server.crt  server.key  templates  values.yaml
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ ls
+CHANGELOG.md  Chart.lock  Chart.yaml  LICENSE  README.md  ca.crt  ca.key  charts  conf  crds  gen-certs.sh  server.crt  server.key  templates  values.yaml
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer$ cd templates/
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer/templates$ ls
+NOTES.txt                  cluster-role.yaml         kube-enforcer-configmap.yaml            kube-enforcer-token.yaml  rolebinding.yaml          starboard-conftest-config.yaml
+_helpers.tpl               envoy-config.yaml         kube-enforcer-deployment.yaml           mutating-webhook.yaml     service-account.yaml      starboard-deployment.yaml
+auto-generate-tls.yaml     image-pull-secret.yaml    kube-enforcer-poddisruptionbudget.yaml  openshift-scc.yaml        service.yaml            validating-webhook.yaml
+cluster-role-binding.yaml  kube-enforcer-certs.yaml  kube-enforcer-priorityclass.yaml        role.yaml                 starboard-configmap.yaml
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer/templates$ vi kube-enforcer-
+kube-enforcer-certs.yaml                kube-enforcer-deployment.yaml           kube-enforcer-priorityclass.yaml
+kube-enforcer-configmap.yaml            kube-enforcer-poddisruptionbudget.yaml  kube-enforcer-token.yaml
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer/templates$ vi kube-enforcer-
+kube-enforcer-certs.yaml                kube-enforcer-deployment.yaml           kube-enforcer-priorityclass.yaml
+kube-enforcer-configmap.yaml            kube-enforcer-poddisruptionbudget.yaml  kube-enforcer-token.yaml
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer/templates$ vi kube-enforcer-
+kube-enforcer-certs.yaml                kube-enforcer-deployment.yaml           kube-enforcer-priorityclass.yaml
+kube-enforcer-configmap.yaml            kube-enforcer-poddisruptionbudget.yaml  kube-enforcer-token.yaml
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer/templates$ vi kube-enforcer-deployment.yaml
+NOTES.txt                               envoy-config.yaml                       kube-enforcer-poddisruptionbudget.yaml  role.yaml                           starboard-conftest-config.yaml
+_helpers.tpl                            image-pull-secret.yaml                  kube-enforcer-priorityclass.yaml        rolebinding.yaml                        starboard-deployment.yaml
+auto-generate-tls.yaml                  kube-enforcer-certs.yaml                kube-enforcer-token.yaml                service-account.yaml                    validating-webhook.yaml
+cluster-role-binding.yaml               kube-enforcer-configmap.yaml            mutating-webhook.yaml                   service.yaml
+cluster-role.yaml                       kube-enforcer-deployment.yaml           openshift-scc.yaml                      starboard-configmap.yaml
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer/templates$ vi kube-enforcer-deployment.yaml
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer/templates$ vi kube-enforcer-deployment.yaml
+ubuntu@ip-10-0-2-126:~/aqua-helm/kube-enforcer/templates$ vi kube-enforcer-deployment.yaml
+
+ubuntu@ip-10-0-2-126:~$ sudo su
+root@ip-10-0-2-126:/home/ubuntu# history
+    1  sudo snap install kubectl
+    2  sudo snap install kubectl --clasic
+    3  sudo snap install kubectl --classic
+    4  kubectl get pods
+    5  history
+root@ip-10-0-2-126:/home/ubuntu# ls
+Containerd-1.7.2-linux-amd64.tar.gz  aqua_key.pem                        k8s.yaml               kubeproxy.service  snap
+ansible.cfg                          cni-plugins-linux-amd64-v1.2.0.tgz  kube-flannel-rbac.yml  pas
+aqua-helm                            hosts                               kube_proxy_start.sh    runc.amd64
+root@ip-10-0-2-126:/home/ubuntu# cd aqua
+bash: cd: aqua: No such file or directory
+root@ip-10-0-2-126:/home/ubuntu# ls
+Containerd-1.7.2-linux-amd64.tar.gz  aqua_key.pem                        k8s.yaml               kubeproxy.service  snap
+ansible.cfg                          cni-plugins-linux-amd64-v1.2.0.tgz  kube-flannel-rbac.yml  pas
+aqua-helm                            hosts                               kube_proxy_start.sh    runc.amd64
+root@ip-10-0-2-126:/home/ubuntu# cd aqua
+bash: cd: aqua: No such file or directory
+root@ip-10-0-2-126:/home/ubuntu# cd aqua-helm/
+root@ip-10-0-2-126:/home/ubuntu/aqua-helm# ls
+Jenkinsfile  aqua-quickstart  cloud-connector  docs      gateway        server       server.csr
+LICENSE      ca.crt           codesec-agent    enforcer  kube-enforcer  server.conf  server.key
+README.md    ca.key           cyber-center     examples  scanner        server.crt   tenant-manager
+root@ip-10-0-2-126:/home/ubuntu/aqua-helm# cat cv^C
+root@ip-10-0-2-126:/home/ubuntu/aqua-helm# cd kube-enforcer/
+root@ip-10-0-2-126:/home/ubuntu/aqua-helm/kube-enforcer# cat values.yaml
+global:
+  # Please specify k8s platform acronym. Allowed values are aks, eks, gke, openshift, tkg, tkgi, k8s
+  # aks = Azure Kubernetes Service
+  # gke = Google kubernetes Engine
+  # openshift = RedHat Openshift/OCP
+  # tkg = VMware Tanzu kubernetes Grid
+  # tkgi = VMware Tanzu kubernetes Grid Integrated Edition
+  # k8s = Plain/on-prem Vanilla Kubernetes
+  # rancher = Rancher Kubernetes Platform
+  # gs = GaintSwarm platform
+  # k3s = k3s kubernetes platform
+  # mke = Mirantis Kubernetes Engine
+  platform: ""
+  enforcer:
+    enabled: false
+  gateway:
+    # change address to gateway endpoint. For Saas use the hostname containing `-gw`
+    # from your onboarding email and switch port to 443
+    address: 54.177.22.156
+    port: 8443
+  # Specifies the secret data for imagePullSecrets needed to fetch the private docker images
+  imageCredentials:
+    # If imageCredentials.create=false and imageCredentials.name not defined
+    # then will be used secret aqua-registry-secret which created by aqua-server helm chart
+    #####################
+    # If imageCredentials.create=false and imageCredentials.name defined then will be used secret with defined name
+    # but in this case secret should be created manually before chart deploying
+    #####################
+    # If imageCredentials.create=create and imageCredentials.name not defined
+    # then will be created a secret with name <Chart ReleaseName>-registry-secret
+    #####################
+    # If imageCredentials.create=create and imageCredentials.name defined
+    # then will be created a secret with name provided name
+    create: true
+    name: "aqua-registry"
+    repositoryUriPrefix: "registry.aquasec.com" # for dockerhub - "docker.io"
+    registry: "registry.aquasec.com" #REQUIRED only if create is true, for dockerhub - "index.docker.io/v1/"
+    username: "srikanthreddy.gajjala@aquasec.com"
+    password: "######"
+
+# If serviceAccount.create=false and serviceAccount.name not defined then will be used serviceAccount aqua-kube-enforcer-sa
+# but in this case serviceAccount should be created manually before chart deploying
+#####################
+# If serviceAccount.create=false and serviceAccount.name defined then will be used serviceAccount with defined name
+# but in this case serviceAccount should be created manually before chart deploying
+#####################
+# If serviceAccount.create=create and serviceAccount.name not defined
+# then will be created a serviceAccount with name <Chart ReleaseName>-sa
+#####################
+# If serviceAccount.create=create and serviceAccount.name defined
+# then will be created a serviceAccount with name provided name
+serviceAccount:
+  create: true
+  name: ""
+
+# Replica count
+ke_ReplicaCount: "1"
+
+# Specify whether to enable/disable the cache by using "yes", "true", "no", "false" values.
+aqua_enable_cache: "yes"
+# default value is 60
+aqua_cache_expiration_period: "60"
+
+# Kube-Enforcer Image
+image:
+  repository: "kube-enforcer"
+  tag: "2022.4.348"
+  pullPolicy: Always
+
+# MicroEnforcer & KubeBench custom image registry
+# Default is KE image registry and KE image pull secrets
+me_ke_custom_registry:
+  enable: false             # Enable to true to pull microenforcer and kubebench images from custom registry
+  registry: ""              # Custom registry name of microenforcer and kubebench
+  imagePullSecretName: ""   # Custom registry image pull secret name to pull microenforcer and kubebench
+
+# Micro Enforcer Image
+microEnforcerImage:
+  repository: "microenforcer"   # Default aqua registry MicroEnforcer repository name
+  tag: "2022.4"
+
+# Kubebench Image
+kubebenchImage:
+  repository: "aquasec/kube-bench"  # Default aqua registry KubeBench repository name
+  tag: "v0.6.15"
+
+# Enable/Disable KB scanning on tainted nodes
+kubeBench:
+  scanTainted: "true"
+
+nameOverride: "aqua-kube-enforcer"
+fullnameOverride: "aqua-kube-enforcer"
+
+# Display a custom cluster name in the infrastructure tab of Aqua Enterprise
+# Follow https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-label-names for naming conventions”
+clusterName: "Default-cluster-name"
+logicalName: ""
+logLevel: ""
+
+# Comma-separated node-labels for nodes on which Kube-Bench is to be skipped. key1=val1,key2=val2,...
+skipNodes: ""
+
+dnsNdots:
+
+# Set create to false if you want to use an existing secret for the kube-enforcer certs
+# If certsSecret.create and certsSecret.name defined then need provide certsSecret.serverCertificate and
+# certsSecret.serverKey and webhooks.caBundle encrypted with base64 and secret for TLS connectivity with kube-api will be created
+# If you want to use auto generated self-signed certificates use option certsSecret.autoGenerated=true and all required self-signed
+# certificates will be created and added to secret with name certsSecret.name
+# Please be aware that if you already has TLS secret created in cluster and decided to use option certsSecret.autoGenerate
+# It will fail with following error. To solve it delete previously create secret kubectl delete secret aqua-kube-enforcer-certs -n aqua
+# Error: UPGRADE FAILED: error validating "": error validating data: unknown object type "nil" in Secret.data.ca.crt
+certsSecret:
+  autoGenerate: false
+  create: true
+  annotations: {}
+  # If you're using existing certs change the name to existing secret name
+  name: "aqua-kube-enforcer-certs"
+  serverCertificate: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURtekNDQW9PZ0F3SUJBZ0lVQnFQRGlKU0FIV0hlMjNuellTZ2lCM0wvcW9Rd0RRWUpLb1pJaHZjTkFRRUwKQlFBd0Z6RVZNQk1HQTFVRUF3d01ZV1J0YVhOemFXOXVYMk5oTUNBWERUSXpNRGd5TXpBME1UUTFObG9ZRHpJeQpPVGN3TmpBM01EUXhORFUyV2pBbU1TUXdJZ1lEVlFRRERCdGhjWFZoTFd0MVltVXRaVzVtYjNKalpYSXVZWEYxCllTNXpkbU13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRQ3ZwaHFsSmpyazU1clIKaFZXNzBCVkYrQVVaMXV6M29tT1hjSXAvM0MvRTQrVWQvTHEwbTFuSVo5OHoyTHZWdVByVTdoNkpWWXIyaUFHVApRT3dvc29ndEk3bUl4RS8reGtYbm5mYjV3M3R6UGhOU1ZzK2xrcmQ2TStPR3BjY3NwRDJoUTF4R3VEZ3RvMURtCmtBdVJKTE9MVnFOVkNvTDlJMGtJRlhwcTV2QjVNS1RRWFc3TGdUS1dHeUpQbHFZQ2hldFc4STJ1aS9yUmovZ2kKRTdJRTF6aUQweW9kSnJISGgwQy90Nm9QaksxZjVnMUhXWlJHZlMzbHFWbkhueEdVOHZBa1gxa3h6clRPeFZrbgpTMXJjeENFbHdReHlSdUhSa3o0VzRhWHNmbFRBN0JIQXRJRjQzMWo2ejJrUXRXS3BzaGQ3cjhxVGlURjM4bTZqCkVyN2R6RnZUQWdNQkFBR2pnYzB3Z2Nvd0NRWURWUjBUQkFJd0FEQUxCZ05WSFE4RUJBTUNCZUF3SFFZRFZSMGwKQkJZd0ZBWUlLd1lCQlFVSEF3SUdDQ3NHQVFVRkJ3TUJNRkVHQTFVZEVRUktNRWlDRzJGeGRXRXRhM1ZpWlMxbApibVp2Y21ObGNpNWhjWFZoTG5OMlk0SXBZWEYxWVMxcmRXSmxMV1Z1Wm05eVkyVnlMbUZ4ZFdFdWMzWmpMbU5zCmRYTjBaWEl1Ykc5allXd3dIUVlEVlIwT0JCWUVGQm8ydTRYWllVWXF0SHpucE1TK0VkY2RMNm9XTUI4R0ExVWQKSXdRWU1CYUFGSXZ4R1ptUmwxL2NNbE1MY3RQdTZoLzRnbUFjTUEwR0NTcUdTSWIzRFFFQkN3VUFBNElCQVFDTApod1B2Z0FwQWVJemQ0bXd6TVA2UkprLzlxQVUzMDVCTUc0RythTDVZUXRqVStvbEo2Tk02M1hqcHVGYWJSMVRGCnhpTWFva1ZITTRBOEhLbTNwOFhHcDBWa3VrWkx1V0h6SnI2eTZ3Z3hrUHIvMFRGcGpNcnhhWWxVcXFtcVhNTEMKbWtmS1c1M1NraUxLemRNZEpNb3BTU1RlYnI4cEtuZ1Y1NWxDb1l2L28wUHVEK01ueUE4V2NxRFE3RUZ2aHJ6YwovRHZkakp3ZmMrdVlNbEhuZnJFaGc4cjVLdEk1ZGp2UE93bkI4ckM0TGxuZElpNEtpQ29ZblJGUys4OC92bnIrCjB4MFlnK3dvLzhyWk50L2NFNEd3WFdSUmxKcUVOb3NkZ0dnTzBIRXVtOTUxQUFtZ2pvKzAzbDQ5azlzUTMwcFMKNVUyV29LMG12a0g1aGhJQ1hwdVQKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo="
+  serverKey: "LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2UUlCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktjd2dnU2pBZ0VBQW9JQkFRQ3ZwaHFsSmpyazU1clIKaFZXNzBCVkYrQVVaMXV6M29tT1hjSXAvM0MvRTQrVWQvTHEwbTFuSVo5OHoyTHZWdVByVTdoNkpWWXIyaUFHVApRT3dvc29ndEk3bUl4RS8reGtYbm5mYjV3M3R6UGhOU1ZzK2xrcmQ2TStPR3BjY3NwRDJoUTF4R3VEZ3RvMURtCmtBdVJKTE9MVnFOVkNvTDlJMGtJRlhwcTV2QjVNS1RRWFc3TGdUS1dHeUpQbHFZQ2hldFc4STJ1aS9yUmovZ2kKRTdJRTF6aUQweW9kSnJISGgwQy90Nm9QaksxZjVnMUhXWlJHZlMzbHFWbkhueEdVOHZBa1gxa3h6clRPeFZrbgpTMXJjeENFbHdReHlSdUhSa3o0VzRhWHNmbFRBN0JIQXRJRjQzMWo2ejJrUXRXS3BzaGQ3cjhxVGlURjM4bTZqCkVyN2R6RnZUQWdNQkFBRUNnZ0VBR2EwQ1FCbnlpZnVCR2hlUGpNRENHMVJDQ3FEc1N0YW1FRUVYUGRHRitoWUcKSy9nQm90MENwdFRvUDcveTFTOFJHNGNqVjVmMWxFd1ZUdDB5cUZCUXI2aUZPb1RYM0xwSEJiQ0ZwY1Q1aXNNTQpPQUVRb1hkczhxUWJJbGVoWWRrd1dSNXJvcnJURzNqQUhyUDN2T1BNaXhYREVtOVM3b1gxNndTWXZIKzlyems2CmtwcjRTRkVoemlWN0dpSXlPR0pYSlBwTk5iai9rUDVvRkhDdkpOajVQVVc1ZE1hcGVkWnA0elYyVVdITlZ3QmsKbXQ5Skl1WGd1NjZKd2EwUEpyK0ZmQ0RoVEt3V0d5djVuRzhhZTNZMkRHWkwxZFQwYVNmSjI3U2dmWnZtcDdlcwpJSG51Nk5GMG0yTEFQRlVWK0J0MU81aXlwbFBkbEc2QnFXdnJvZExob1FLQmdRRHlST0tZM0Frd3JmeEJQdVZUCmgyUDF2dGQvd3BKTDQwcTZNODZvOElNRUY3MjdpTWV5MEp1K3NFWmR1N20wZjhoMURwdFVsaCtTR0NVZlV4VWMKbGpOTForeExnQlZrei8wWld3d0J5NkZueFRXdXRYYlloSURYNHVtL3orQ2dENnVza2QwbUF4SWcxYUVZNnlseQo3UytyUTREWlNnVzVDRmNCaVV1UGlVZnB0UUtCZ1FDNW1wM3MxQ3lYLzZmRlpDTjRkdkx3eldXaXRndEpIbXpECkpVd1o3VStvM3gvVmpka0E0QXh2OCtIck1pYVlBeUVHalJUdmtna1JxUHJXUzArdUlmTmZLUmU3V1JOWWtQT0UKdXdUb2pRQjZxNUpPeFFXaWhpVTg5UTBPeHVGY0YyQWxRbGpSRW1LQmN1Z1l6Vzg2aHV0MWkwcXNlZmxmTTc4dApuRDlvUVd5RVp3S0JnQTNuT0IzUG10TnBXSzJoMzJWQXd0TEtoZkYyQ0JGRTFQZ0VteHFFMnUvME1OWS9UajZMCnpEUlFSMmwvcVhPYlZiU3FCdTMrdzRjTnphdVRpQVdnOVFhaHl5UzJFQVErRDJkU0cwbExGMU11TlJ0Mm5JQm0KY2tKeGFqcXd3bEpOTSt2dVh3T2NiNERrNFo3ZGQvNTVjQi9pK3RUOWM0Q2Y0dVphcTdSc0MyMTFBb0dBQXB1NgpwbTVnNWczd3RLUndueXZFeEQrT3N4ZXQxdXczaVJLSUhFRXFnbXdJVFg3OTByWlRWbXR0L0ZrckU2M1BsQUQ5CmoxUlZEa3Q2b3ZKUi8xZDR6UmlOdmRORm8xUCtLQnBjdWt2byt0QlljUVR4ekZQb1NCQUZpL1NkakNiRDhpSVoKajI2YnRjZ0FuUUNlRkl0NjJaOElnSjRDTkNWTkJYNFJvZ3h4VXZjQ2dZRUEwYTZ0Y2k1aFdaYlJBbzh5R2JrcgoyUmxVam81NG52dXZFZFpSSWJaUVZSMVlPeDVOZUpyblpVd2d1VHhGclJRcThsQVJNaFpvL050WTlaSnF0alZyClQ0dytNNzd4ZWFqLzVQS25KaTArRlpOVVNPTURIZWNDaTlUWEJhQ0JsMHI4Z2lUMEd4RnFSSkx4S084RjJhT0QKY3RFcXBIdUpJMzVrdmJzVDdUMlpYMmc9Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K"
+
+# Hashicorp Vault is a secrets management tool
+# Below vaultSecret and vaultAnnotations section helps setting vault sidecar/initcontainer agents to load enforcer-token securely
+vaultSecret:
+  enabled: false         # Enable to true once you have secrets in vault and annotations are enabled to load enforcer token from hashicorp vault
+  vaultFilepath: ""      # Change the path to "/vault/secrets/<filename>" as per the setup
+
+# Add hashicorp Vault annotations to enable sidecar/init-container vault agent to load enforcer token
+# example annotations for self-hosted vault server:
+vaultAnnotations:
+  ####
+  # vault.hashicorp.com/agent-inject: "true"
+  # vault.hashicorp.com/agent-inject-status: update
+  # vault.hashicorp.com/agent-pre-populate-only: 'false'                     # Enable to true to add vault agent as init-container without sidecar
+  # vault.hashicorp.com/role: "kube-enforcer"                                # Specify your role used by vault agent auto-auth
+  # vault.hashicorp.com/agent-inject-secret-kube-enforcer-token: ""          # Specify your vault secrets path eg: `aqua-path/data/aqua-enforcer/token`
+  # vault.hashicorp.com/agent-inject-template-kube-enforcer-token: |
+  #   {{- with secret "aqua-path/data/kube-enforcer/token" -}}
+  #   export AQUA_TOKEN="{{ .Data.data.token}}"
+  #   {{- end -}}
+  ####
+  # Change aqua secret path as per the setup
+  # Add the secrets in Key Value pair as environment variable
+
+aquaSecret:
+  create: true
+  name: "aqua-kube-enforcer-token"
+  # Enter the enforcer token in "clear-text" format without quotes generated from the Console UI, if `aquaSecret.create: true`
+  kubeEnforcerToken: ke-token
+
+clusterRole:
+  name: "aqua-kube-enforcer"
+  usingPodEnforcer: true
+
+clusterRoleBinding:
+  name: "aqua-kube-enforcer"
+
+role:
+  name: "aqua-kube-enforcer"
+
+roleBinding:
+  name: "aqua-kube-enforcer"
+
+webhooks:
+  # set this field true if you're using cert-manager and don't need to pass a caBundle
+  certManager: false
+  # Add base64 value of the CA cert/Ca Bundle/RootCA Cert if certificates are not generated from cert-manager to webhooks.caBundle
+  caBundle: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURFVENDQWZtZ0F3SUJBZ0lVRHhTcjUrMUpFNEs5blp5WEtDU1N5bXkvSTZ3d0RRWUpLb1pJaHZjTkFRRUwKQlFBd0Z6RVZNQk1HQTFVRUF3d01ZV1J0YVhOemFXOXVYMk5oTUNBWERUSXpNRGd5TXpBME1UUTFObG9ZRHpJeQpPVGN3TmpBM01EUXhORFUyV2pBWE1SVXdFd1lEVlFRRERBeGhaRzFwYzNOcGIyNWZZMkV3Z2dFaU1BMEdDU3FHClNJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURJbjV0ZkVEazNpQ3IxeGNmQTBTQlhBeVNGSXNTZ0UzZFkKMlpFbC9lOWhlT1d0dmg3T001dC9PMDI2TjE4d212QlJQTTdWZHNyTUtVQmVQcFVaZnF6ZHVxVHJYQnVGbHdpWAovemVhQ0g5V2Vrb0lyQ1I5eFRYZW5xVUp1ZFRwem5NYXhZSUVka081aCtPd1M4MXU1QzJ0K2lTUlM4N2RZaUM4CnRWT2dwQ2xkbjFJdjNJV0I3TldCZThCQ1RCdVlzR3NzOGU0SzhzejNwTEVZeDIvQ3d3KzdtNjZ4U0MxSWl5MEMKMUd5NGhvYWhXSHF6TWd0TS8ya2FWcWtoNjlqTEczM0Myb3ZtQzFSN3hpVk1rOWZ2ai9wYUVlTVRVMjE2MUJWbQp1TW5wdmNRckx3TktjZytiNkNXRlBFTnFEdUo1ZElyOXJmOVRnTUlaeHpXZlZJTGpMeVpSQWdNQkFBR2pVekJSCk1CMEdBMVVkRGdRV0JCU0w4Um1aa1pkZjNESlRDM0xUN3VvZitJSmdIREFmQmdOVkhTTUVHREFXZ0JTTDhSbVoKa1pkZjNESlRDM0xUN3VvZitJSmdIREFQQmdOVkhSTUJBZjhFQlRBREFRSC9NQTBHQ1NxR1NJYjNEUUVCQ3dVQQpBNElCQVFBNjkrRDBYdDQ0d0tmeGRtcEZwS0JPWmlKNnFYd2krNkswSzhsZDl4MTFvb1VtQXljUFZraGkvZ2xHClduNDZSYTVjMHhxVE9manRNNlNSRjlMNlNTU2poOXhoUkNEUkhvbDFFV2Y0ZkRkOVdEei9rSVEwcUtUS2JWREUKTjIyNU5SQ1MxY3dNcGtwNkNwNVFsRVcySnRFb3oydkpzcnNPUE5wY0h5eENoZnQ2enhFZG50eXdMUi9uaXc1NwpNQW1yN3ZQcE9tTEtXTUYrNEpKc1pKZlc3M1E2Wk9kRlNhcWI2OUVVYU9aWU90VVU4ekprSyt3ODAvOHErQ3V3CkdES1ZVYnFUUzdKemozanZMTGVPdU1EN1VUeG1qK0ZsRG1udktGNk5VVnpOQjV2MW9KcG1Yd3ZCTDIyZ2R0ZzEKVk1IS0YyejlHcU8yNUlsS0NmQStHYVA3WEprNgotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg=="
+  failurePolicy: Ignore
+  validatingWebhook:
+    name: "kube-enforcer-admission-hook-config"
+    timeout: 2
+    annotations: {}
+  mutatingWebhook:
+    name: "kube-enforcer-me-injection-hook-config"
+    timeout: 2
+    annotations: {}
+      # cert-manager.io/inject-ca-from: < namespace >/< certsSecret.name >
+      # If you are using webhooks.certManager=true, so need to add cert-manager annotations
+
+securityContext:
+  runAsUser: 11431
+  runAsGroup: 11433
+  fsGroup: 11433
+
+container_securityContext: {}
+
+readinessProbe:
+  httpGet:
+    path: /readyz
+    port: 8080
+  initialDelaySeconds: 60
+  periodSeconds: 30
+
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  initialDelaySeconds: 60
+  periodSeconds: 30
+
+## Please use the below probes for KubeEnforcer version < 6.5.22052 or version != latest
+## livenessProbe:
+##   httpGet:
+##   tcpSocket:
+##     port: 8080
+##   initialDelaySeconds: 60
+##   periodSeconds: 30
+##
+## readinessProbe:
+##   httpGet:
+##   tcpSocket:
+##     port: 8080
+##   initialDelaySeconds: 60
+##   periodSeconds: 30
+
+resources: {}
+  # Note: For recommendations please check the official sizing guide.
+  # requests:
+  #   cpu: 250m
+  #   memory: 0.2Gi
+  # limits:
+  #   cpu: 500m
+  #   memory: 1.5Gi
+
+nodeSelector: {}
+tolerations: []
+podAnnotations: {}
+podLabels: {}
+affinity: {}
+
+podDisruptionBudget:
+  minAvailable: 1
+
+priorityClass:
+  create: false
+  name: ""
+  preemptionPolicy: "PreemptLowerPriority"
+  value: 1000000
+
+TLS:
+  # enable to true for secure communication
+  enabled: false
+  # provide certificates secret name created to enable tls/mtls communication between enforcer and gateway/envoy
+  secretName: ""
+  # provide filename of the public key eg: aqua_web.crt
+  publicKey_fileName: ""
+  # provide filename of the private key eg: aqua_web.key
+  privateKey_fileName: ""
+  # provide filename of the rootCA, if using self-signed certificates eg: rootCA.crt
+  rootCA_fileName: ""
+  # change it to true for enabling mTLS between enforcer and gateway/envoy
+  tls_verify: false
+
+# extraEnvironmentVars is a list of extra environment variables to set in the kube-enforcer deployment
+# https://docs.aquasec.com/docs/kubeenforcer-variables
+# The variables could be provided via values.yaml file as shown below
+# or using cli command, for example:  --set extraEnvironmentVars.http_proxy="1.1.1.1",extraEnvironmentVars.https_proxy="2.2.2.2"
+extraEnvironmentVars: {}
+  # http_proxy: < >
+  # https_proxy: < >
+  # no_proxy: < >
+  # ENV_NAME: value
+
+# extraSecretEnvironmentVars is a list of extra environment variables to set in the enforcer daemonset.
+# These variables take value from existing Secret objects.
+extraSecretEnvironmentVars: []
+  # - envName: ENV_NAME
+  #   secretName: name
+  #   secretKey: key
+
+# extraVolumeMounts is a list of extra volumes to mount into the container's filesystem of the KubeEnforcer deployment
+extraVolumeMounts: []
+
+# extraVolumes is a list of volumes that can be mounted inside the KubeEnforcer deployment
+extraVolumes: []
+
+starboard:
+  enabled: true
+  replicaCount: "1"
+  appName: "starboard-operator"
+  serviceAccount:
+    create: true
+    name: "starboard-operator"
+  clusterRoleBinding:
+    name: "starboard-operator"
+  clusterRole:
+    name: "starboard-operator"
+  automountServiceAccountToken: "true"
+
+  securityContext: {}
+
+  image:
+    repositoryUriPrefix: "docker.io/aquasec"
+    repository: "starboard-operator"
+    tag: "0.15.13"
+    pullPolicy: Always
+
+  container_securityContext:
+    privileged: false
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+
+  OPERATOR_NAMESPACE: ""
+  OPERATOR_TARGET_NAMESPACES: ""
+  OPERATOR_LOG_DEV_MODE: "false"
+  OPERATOR_CONCURRENT_SCAN_JOBS_LIMIT: "10"
+  OPERATOR_SCAN_JOB_RETRY_AFTER: "30s"
+  OPERATOR_METRICS_BIND_ADDRESS: ":8080"
+  OPERATOR_HEALTH_PROBE_BIND_ADDRESS: ":9090"
+  OPERATOR_CIS_KUBERNETES_BENCHMARK_ENABLED: "false"
+  OPERATOR_VULNERABILITY_SCANNER_ENABLED: "false"
+  OPERATOR_CONFIG_AUDIT_SCANNER_SCAN_ONLY_CURRENT_REVISIONS: "true"
+  OPERATOR_BATCH_DELETE_LIMIT: "10"
+  OPERATOR_BATCH_DELETE_DELAY: "10s"
+  OPERATOR_CLUSTER_COMPLIANCE_ENABLED: false
+
+  ports:
+    metricContainerPort: 8080
+    probeCntainerPort: 9090
+
+  resources: {}
+
+  readinessProbe:
+    httpGet:
+      path: /readyz/
+      port: probes
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    successThreshold: 1
+    failureThreshold: 3
+
+  livenessProbe:
+    httpGet:
+      path: /healthz/
+      port: probes
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    successThreshold: 1
+    failureThreshold: 10
+
+  podLabels: {}
+  nodeSelector: {}
+  tolerations: []
+  podAnnotations: {}
+  affinity: {}
+
+##Kube Enforcer advance deployment options
+### Advanced Deployment (for Pod Enforcer injection)
+### When using KubeEnforcers for Pod Enforcer injection, it is recommended that you deploy the KubeEnforcers in a special Advanced configuration.
+### This will cause Pod Enforcer traffic to be routed to the KubeEnforcers via a local envoy, which then forwards the traffic to an Aqua Gateway.
+### This configuration improves performance and reduces remote network connections between pods and Gateways.
+kubeEnforcerAdvance:
+  enable: false
+  nodeID: "envoy"
+
+  envoy:
+    image:
+      repository: "envoy"
+      tag: "2022.4"
+      pullPolicy: Always
+
+    # Enabling Envoy requires the use of TLS certificates for the cluster section, while the cluster TLS section is optional and to be enabled if TLS is in use for kube-enforcer and gateway.
+    # Find the instructions in the readme for help with generating the required certificates.
+    TLS:
+      listener:
+        # true to enable secure communication between Aqua Envoy and Gateways
+        enabled: false
+        # provide secret name containing the certificates
+        secretName: "envoy-mtls-certs"
+        # provide filename of the public key in the secret eg: aqua-lb.crt
+        publicKey_fileName: ""
+        # provide filename of the private key in the secret eg: aqua-lb.key
+        privateKey_fileName: ""
+        # optional: use this field if using a custom CA or chain
+        rootCA_fileName: ""
+
+    readinessProbe:
+      exec:
+        command:
+        - cat
+        - /etc/aquasec/envoy/configured
+      initialDelaySeconds: 30
+      periodSeconds: 10
+
+    livenessProbe: {}
+
+    resources: {}
+
+    ## Enabling this will replace any templated envoy configuration with the list of files passed below
+    custom_envoy_files: {}
+
+enforcer:
+  serviceAccount:
+    create: true
+    name: ""
+
+  clusterRole:
+    roleRef: ""
+
+  # Hashicorp Vault is a secrets management tool
+  # Below vaultSecret and vaultAnnotations section helps setting vault sidecar/initcontainer agents to load enforcer-token securely
+  vaultSecret:
+    enabled: false          # Enable to true once you have secrets in vault and annotations are enabled to load enforcer token from hashicorp vault
+    vaultFilepath: ""       # Change the path to "/vault/secrets/<filename>" as per the setup
+
+  # Add hashicorp Vault annotations to enable sidecar/init-container vault agent to load enforcer token
+  # example annotations for self-hosted vault server:
+  vaultAnnotations:
+    ####
+    # vault.hashicorp.com/agent-inject: "true"
+    # vault.hashicorp.com/agent-inject-status: update
+    # vault.hashicorp.com/agent-pre-populate-only: 'false'                 # Enable to true to add vault agent as init-container without sidecar
+    # vault.hashicorp.com/role: "aqua-enforcer"                            # Specify your role used by vault agent auto-auth
+    # vault.hashicorp.com/agent-inject-secret-enforcer-token: ""           # Specify your vault secrets path eg: `aqua-path/data/aqua-enforcer/token`
+    # vault.hashicorp.com/agent-inject-template-enforcer-token: |
+    #  {{- with secret "aqua-path/data/aqua-enforcer/token" -}}
+    #  export AQUA_TOKEN="{{ .Data.data.token}}"
+    #  {{- end -}}
+    ####
+    # Change aqua secret path as per the setup
+    # Add the secrets in Key Value pair as environment variable
+
+  # Enter the enforcer token in "clear-text" format without quotes generated from the Console UI
+  enforcerToken: enforcer-token
+  expressMode: false
+  enforcerTokenSecretName: null
+  enforcerTokenSecretKey: null
+
+  logicalName:
+  nodeName:
+  nameOverride:
+
+  securityContext:
+    privileged: false
+    capabilities:
+      add:
+        - SYS_ADMIN
+        - NET_ADMIN
+        - NET_RAW
+        - SYS_PTRACE
+        - KILL
+        - MKNOD
+        - SETGID
+        - SETUID
+        - SYS_MODULE
+        - AUDIT_CONTROL
+        - SYSLOG
+        - SYS_CHROOT
+        - SYS_RESOURCE
+        - IPC_LOCK
+
+  hostRunPath: # pks - /var/vcap/sys/run/docker
+  # enable this to connect enforcer with multiple gateways
+  multiple_gateway:
+    enabled: false
+  # use the below hosts to add multiple gateways as required to enforcer. Format is <hostname>:<port_number>
+  multi_gates:
+    - aqua-gateway1-svc:8443 #example gateway 1
+    - aqua-gateway2-svc:8443 #example gateway 2
+
+
+  image:
+    repository: enforcer
+    tag: "2022.4"
+    pullPolicy: Always
+
+  restartPolicy: Always
+
+  healthMonitor:
+    enabled: "true"
+
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: 8096
+    initialDelaySeconds: 60
+    periodSeconds: 30
+  readinessProbe:
+    httpGet:
+      path: /readinessz
+      port: 8096
+    initialDelaySeconds: 60
+    periodSeconds: 30
+  resources: {}
+    # Note: For recommendations please check the official sizing guide.
+    # requests:
+    #   cpu: 350m
+    #   memory: 0.512Gi
+    # limits:
+  #   cpu: 1500m
+  #   memory: 1.5Gi
+  nodeSelector: {}
+  tolerations: []
+  podAnnotations: {}
+  affinity: {}
+  #  my-annotation-key: my value; more value
+  podLabels: {}
+
+  dnsPolicy: "ClusterFirst"
+  hostPID: "true"
+  schedulerName: "default-scheduler"
+  terminationGracePeriodSeconds: "30"
+
+  TLS:
+    enabled: false
+    # provide certificates secret name created to enable tls/mtls communication between enforcer and gateway/envoy
+    secretName: ""
+    #provide filename of the public key eg: aqua_enforcer.crt
+    publicKey_fileName: ""
+    #provide filename of the private key eg: aqua_enforcer.key
+    privateKey_fileName: ""
+    #provide filename of the rootCA, if using self-signed certificates eg: rootCA.crt
+    rootCA_fileName: ""
+    # change it to true for enabling mTLS between enforcer and gateway/envoy
+    tls_verify: false
+
+  # extraEnvironmentVars is a list of extra environment variables to set in the enforcer daemonset.
+  # https://docs.aquasec.com/docs/enforcer-optional-variables
+  # The variables could be provided via values.yaml file as shown below
+  # or using cli command, for example:  --set extraEnvironmentVars.http_proxy="1.1.1.1",extraEnvironmentVars.https_proxy="2.2.2.2"
+  extraEnvironmentVars: {}
+    # http_proxy: < >
+    # https_proxy: < >
+    # no_proxy: < >
+    # ENV_NAME: value
+
+  # extraSecretEnvironmentVars is a list of extra environment variables to set in the enforcer daemonset.
+  # These variables take value from existing Secret objects.
+  extraSecretEnvironmentVars: []
+    # - envName: ENV_NAME
+    #   secretName: name
+    #   secretKey: key
+
+# AquaEnforcer DaemonSet name for KubEnforcer config map
+enforcer_ds_name: ""
+root@ip-10-0-2-126:/home/ubuntu/aqua-helm/kube-enforcer# cat values.yaml  | vi -
+Vim: Reading from stdin...
+
+root@ip-10-0-2-126:/home/ubuntu/aqua-helm/kube-enforcer#
